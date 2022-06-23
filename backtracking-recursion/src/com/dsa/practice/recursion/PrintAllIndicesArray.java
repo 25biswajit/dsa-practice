@@ -7,14 +7,11 @@ import org.junit.jupiter.api.Test;
 // Print All Indices for a specific number in an Array
 public class PrintAllIndicesArray {
     @Test
-    public void test(){
-        PrintAllIndicesArrayAlgorithm algorithm = new PrintAllIndicesArrayAlgorithm();
-        int[] array = new int[]{1,2,3,4,5,3,7,8,3};
-        Assertions.assertArrayEquals(new int[]{2,5,8} , algorithm.main(array,3));
+    public void test() {
+        PrintAllIndicesArray algorithm = new PrintAllIndicesArray();
+        int[] array = new int[]{1, 2, 3, 4, 5, 3, 7, 8, 3};
+        Assertions.assertArrayEquals(new int[]{2, 5, 8}, algorithm.main(array, 3));
     }
-}
-
-class PrintAllIndicesArrayAlgorithm{
 
     int[] main(int[] array, int number){
         return printAllIndicesArray(array, 0, number, 0);

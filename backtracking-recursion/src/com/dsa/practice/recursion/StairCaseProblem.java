@@ -12,7 +12,7 @@ import java.util.List;
 public class StairCaseProblem {
     @Test
     public void test(){
-        StairCaseProblemAlgorithm algorithm = new StairCaseProblemAlgorithm();
+        StairCaseProblem algorithm = new StairCaseProblem();
         // total = 4 , Possible Move = 1,2,3
         List<String> basicPathResult = algorithm.getStairCasePathBasic(4);
 
@@ -21,16 +21,19 @@ public class StairCaseProblem {
         List<String> advancedPathResult = algorithm.getStairCasePathAdvanced(possibleAllowedMoves,4);
 
         Assertions.assertEquals(advancedPathResult, basicPathResult);
+        System.out.println("4 Steps - Move 1,2,3");
         advancedPathResult.forEach(x-> System.out.println(x.substring(0,x.length()-1)));
 
         // total = 5 , Possible Move = 1,3,7
         possibleAllowedMoves = new int[]{1,3,7};
         advancedPathResult = algorithm.getStairCasePathAdvanced(possibleAllowedMoves,5);
+        System.out.println("5 Steps - Move 1,3,7");
         advancedPathResult.forEach(x-> System.out.println(x.substring(0,x.length()-1)));
-    }
-}
 
-class StairCaseProblemAlgorithm{
+        System.out.println("Print : 4 Steps - Move 1,3,7");
+        algorithm.printStairCase(4, "");
+    }
+
     List<String> getStairCasePathBasic(int steps){
         if(steps == 0){
             List<String> blankStepList = new ArrayList<>();
@@ -73,5 +76,19 @@ class StairCaseProblemAlgorithm{
         for(String move : path){
             finalPath.add(step + "." + move);
         }
+    }
+
+    void printStairCase(int stepsLeft, String path){
+        if(stepsLeft == 0){
+            System.out.println("Print Path : " + path);
+            return;
+        }else if(stepsLeft < 0){
+            //System.out.println("Ignored path : "+ path);
+            return;
+        }
+
+        printStairCase(stepsLeft -1, "1"+path);
+        printStairCase(stepsLeft -2, "2"+path);
+        printStairCase(stepsLeft -3, "3"+path);
     }
 }

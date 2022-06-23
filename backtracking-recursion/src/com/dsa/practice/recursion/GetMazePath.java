@@ -12,15 +12,12 @@ import java.util.List;
 public class GetMazePath {
     @Test
     public void test(){
-        GetMazePathAlgorithm algorithm = new GetMazePathAlgorithm();
+        GetMazePath algorithm = new GetMazePath();
         List<String> result1 = algorithm.getMazePath(0,0,2,2);
         List<String> result2 = algorithm.getMazePathNew(0,0,2,2);
         Assertions.assertArrayEquals(result1.toArray(), result2.toArray());
         result2.forEach(System.out::println);
     }
-}
-
-class GetMazePathAlgorithm{
 
     // Learnt Solution
     List<String> getMazePath(int sourceX, int sourceY, int destX, int destY){
