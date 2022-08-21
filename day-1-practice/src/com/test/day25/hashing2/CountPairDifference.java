@@ -27,7 +27,13 @@ public class CountPairDifference {
         Assertions.assertEquals(5, solve(list, 10));
     }
 
-    public int solve(ArrayList<Integer> list, int target) {
+    //@Test
+    public void test4() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(7, 4, 1, 4, 10, 7, 10, 10));
+        Assertions.assertEquals(8, solve(list, 3));
+    }
+
+    public int solveOld(ArrayList<Integer> list, int target) {
         int c = 0;
         HashMap<Integer, List<Integer>> map = new HashMap<>();
         for(int i = 0; i< list.size(); i++){
@@ -50,6 +56,21 @@ public class CountPairDifference {
             }
             list1.add(i);
             map.put(a, list1);
+        }
+        return c;
+    }
+
+    public int solve(ArrayList<Integer> list, int target) {
+        int mod = 1000000007;
+        int c = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i< list.size(); i++){
+            int a = list.get(i);
+            int b = a -  target;
+            c = (c + map.getOrDefault(b,0))%mod;
+            b = a + target;
+            c = (c + map.getOrDefault(b,0))%mod;
+            map.put(a, map.getOrDefault(a, 0)+1);
         }
         return c;
     }

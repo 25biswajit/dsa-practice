@@ -21,7 +21,7 @@ public class CountPairSum {
         Assertions.assertEquals(6, solve(list,2));
     }
 
-    public int solve(ArrayList<Integer> list, int target) {
+    public int solveOld(ArrayList<Integer> list, int target) {
         int c = 0;
         HashMap<Integer, List<Integer>> map = new HashMap<>();
         for(int i = 0; i< list.size(); i++){
@@ -38,6 +38,18 @@ public class CountPairSum {
             }
             list1.add(i);
             map.put(a, list1);
+        }
+        return c;
+    }
+
+    public int solve(ArrayList<Integer> list, int target) {
+        int c = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i< list.size(); i++){
+            int a = list.get(i);
+            int b = target - a;
+            c = (c + map.getOrDefault(b,0))%1000000007;
+            map.put(a, map.getOrDefault(a, 0)+1);
         }
         return c;
     }

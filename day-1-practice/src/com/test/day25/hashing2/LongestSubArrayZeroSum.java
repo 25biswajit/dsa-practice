@@ -41,38 +41,11 @@ public class LongestSubArrayZeroSum {
         Assertions.assertEquals(solveBruteForce(list), solveOptimized(list));
     }
 
-    public int solveOptimizedMy(ArrayList<Integer> list) {
-        int sum = 0;
-        int max = 0;
-        HashMap<Integer,Integer> map = new HashMap<>();
-        for(int currentIndex =0; currentIndex<list.size();currentIndex++){
-            sum += list.get(currentIndex);
-            if(map.containsKey(sum)){
-                int prevIndex = map.get(sum);
-                int subArrayLength = currentIndex - prevIndex;
-                max = Integer.max(max, subArrayLength);
-            }else{
-                int firstIndex;
-                if(sum == 0){
-                    firstIndex = calculateFirstIndexForZero(currentIndex, sum, list);
-                    int prevIndex = firstIndex;
-                    int subArrayLength = currentIndex - prevIndex;
-                    max = Integer.max(max, subArrayLength);
-                }else{
-                    firstIndex = currentIndex;
-                }
-                map.put(sum, firstIndex);
-            }
-        }
-        System.out.println("Max Length:" + max);
-        return max;
-    }
-
     public int solveOptimized(ArrayList<Integer> list) {
-        int sum = 0;
+        long sum = 0;
         int max = 0;
         int currentIndex = -1;
-        HashMap<Integer,Integer> map = new HashMap<>();
+        HashMap<Long,Integer> map = new HashMap<>();
         map.put(sum, currentIndex);
 
         while( currentIndex<list.size()-1){
@@ -87,16 +60,6 @@ public class LongestSubArrayZeroSum {
             }
         }
         return max;
-    }
-
-    private Integer calculateFirstIndexForZero(int currentIndex, int sum, ArrayList<Integer> list) {
-        int i = currentIndex - 1;
-        int reverseSum = list.get(currentIndex);
-        while(i >= 0 && reverseSum!=0){
-            reverseSum = reverseSum + list.get(i);
-            i--;
-        }
-        return i;
     }
 
     public int solveBruteForce(ArrayList<Integer> list){

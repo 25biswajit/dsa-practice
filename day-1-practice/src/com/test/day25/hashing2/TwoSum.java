@@ -23,9 +23,31 @@ public class TwoSum {
         output = new ArrayList<>(Arrays.asList(4,8));
         Assertions.assertArrayEquals(output.toArray(), twoSum(list, -3).toArray());
 
-        list = Arrays.asList(1,1,1);
+        list = Arrays.asList(1,1,1,1);
         output = new ArrayList<>(Arrays.asList(1,2));
         Assertions.assertArrayEquals(output.toArray(), twoSum(list, 2).toArray());
+    }
+
+    public ArrayList<Integer> twoSum1(final List<Integer> list, int target) {
+        HashMap<Integer,Integer> hashMap = new HashMap<>();
+        ArrayList<Integer> result = new ArrayList<>();
+        Integer index1,index2;
+        for(int i=0;i<list.size();i++){
+            int x = list.get(i);
+            int y = target - x;
+            if(hashMap.containsKey(y)){
+                index1 = hashMap.get(y);
+                index2 = x == y || !hashMap.containsKey(x) ? i : hashMap.get(x);
+                result.add(index1+1);
+                result.add(index2+1);
+                return result;
+            }else{
+                if(!hashMap.containsKey(x)){
+                    hashMap.put(x, i);
+                }
+            }
+        }
+        return result;
     }
 
     public ArrayList<Integer> twoSum(final List<Integer> list, int target) {
@@ -37,7 +59,7 @@ public class TwoSum {
             int y = target - x;
             if(hashMap.containsKey(y)){
                 index1 = hashMap.get(y);
-                index2 = x == y || !hashMap.containsKey(x) ? i : hashMap.get(x);
+                index2 = x==y ? i : hashMap.getOrDefault(x, i);
                 result.add(index1+1);
                 result.add(index2+1);
                 return result;

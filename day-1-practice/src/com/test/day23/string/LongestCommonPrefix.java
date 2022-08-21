@@ -16,32 +16,30 @@ public class LongestCommonPrefix {
         Assertions.assertEquals("abcd", longestCommonPrefix(list));
     }
 
-    public String longestCommonPrefix(ArrayList<String> A) {
-        String minLengthWord = A.get(0);
+    public String longestCommonPrefix(ArrayList<String> list) {
+        String minLengthWord = findMinLenWord(list);
+        int n = minLengthWord.length();
+        String result = "";
+        for(int i=0;i < n;i++){
+            char ithCharInMin = minLengthWord.charAt(i);
+            for(String s : list){
+                char ithChar = s.charAt(i);
+                if(ithChar != ithCharInMin){
+                    return result;
+                }
+            }
+            result = result + ithCharInMin;
+        }
+        return result;
+    }
 
-        for(String s : A){
+    private String findMinLenWord(ArrayList<String> list) {
+        String minLengthWord = list.get(0);
+        for(String s : list){
             if(s.length() < minLengthWord.length()){
                 minLengthWord = s;
             }
         }
-        int n = minLengthWord.length();
-        int i = 0;
-        boolean flag = false;
-        String result = "";
-        while(i < n && !flag){
-            char ithCharInMin = minLengthWord.charAt(i);
-            for(String s : A){
-                char ithChar = s.charAt(i);
-                if(ithChar != ithCharInMin){
-                    flag = true;
-                    break;
-                }
-            }
-            if(!flag){
-                result = result + String.valueOf(ithCharInMin);
-                i++;
-            }
-        }
-        return result;
+        return minLengthWord;
     }
 }

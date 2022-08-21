@@ -46,11 +46,8 @@ public class SubArraySumEqualsK {
         for (int i = 0; i< list.size(); i++){
             sum += list.get(i);
             int part = sum - target;
-            if(map.containsKey(part)){
-                c = c + map.get(part);
-            }
-            Integer freq = map.get(sum);
-            freq = freq == null ? 0 : freq;
+            c = c + map.getOrDefault(part,0);
+            int freq = map.getOrDefault(sum,0);
             map.put(sum, freq + 1);
         }
         return c;
@@ -67,6 +64,7 @@ public class SubArraySumEqualsK {
                 }
             }
         }
+        System.out.println(c);
         return c;
     }
 
