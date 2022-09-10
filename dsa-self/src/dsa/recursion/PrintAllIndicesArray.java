@@ -1,4 +1,4 @@
-package dsa.basic.practice.recursion;
+package dsa.recursion;
 
 
 import org.junit.jupiter.api.Assertions;
