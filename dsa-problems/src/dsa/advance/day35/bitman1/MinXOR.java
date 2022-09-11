@@ -7,9 +7,28 @@ A = [0, 2, 5, 7], Output : 2, Explanation: 0 xor 2 = 2
 A = [0, 4, 7, 9], Output : 3
 */
 
-public class MinXOR {
-}
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
+public class MinXOR {
+    @Test
+    public void test(){
+        int[] arr = {0, 2, 5, 7};
+        Assertions.assertEquals(2, findMinXor(arr));
+    }
+
+    public int findMinXor(int[] arr) {
+        int n = arr.length;
+        int min = Integer.MAX_VALUE;
+        Arrays.sort(arr);
+        for(int i = 1; i< n; i++){
+            min = Math.min(min, arr[i-1]^arr[i]);
+        }
+        return min;
+    }
+}
 
  /*
 Idea : Sort the array. The answer will be the minimal value of X[i] XOR X[i+1] for every i.
@@ -36,4 +55,7 @@ This implies (B XOR C) < (A XOR B)
 Time complexity: O(N * logN) to sort the array and O(N) to find the smallest XOR
 Space complexity: O(1) [ Heap Sort ]
 If Merge Sort is used Space Complexity would be O(N)
+
+https://www.geeksforgeeks.org/minimum-xor-value-pair/
+This is N log N solution this could be done in O(N) using trie.
 */
