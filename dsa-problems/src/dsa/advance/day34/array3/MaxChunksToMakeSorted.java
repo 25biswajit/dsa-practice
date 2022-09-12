@@ -3,7 +3,9 @@ package dsa.advance.day34.array3;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 /*
 Given an array of integers A of size N that is a permutation of [0, 1, 2, ..., (N-1)],

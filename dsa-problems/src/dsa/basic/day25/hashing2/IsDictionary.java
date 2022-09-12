@@ -3,7 +3,10 @@ package dsa.basic.day25.hashing2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class IsDictionary {
     //@Test

@@ -2,9 +2,10 @@ package dsa.advance.day34.array3;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static dsa.advance.day34.array3.MergeOverlappingIntervals.mergeSortedIntervals;
 
 import java.util.ArrayList;
+
+import static dsa.advance.day34.array3.MergeOverlappingIntervals.mergeSortedIntervals;
 
 
 // Insert New Interval into NonOverlapping Intervals
