@@ -15,7 +15,7 @@ public class GreyCode {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-
+    //TC:O(2^N) , SC: O(2^N + N)
     public ArrayList<Integer> grayCode(int n) {
         if(n==1){
             return new ArrayList<>(Arrays.asList(0,1));

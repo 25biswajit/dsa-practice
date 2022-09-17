@@ -14,6 +14,7 @@ public class PowerMod {
         Assertions.assertEquals(20805472, pow(71045970,41535484,64735492));
     }
 
+    // TC:O(log P) , SC: O(log P)
     public int pow(int num, int p, int mod) { // n ^ p % mod
         if(num < 0) num = mod + num;
         if(num == 0) return 0;

@@ -10,6 +10,7 @@ public class AnotherSequenceProblem {
         Assertions.assertEquals(672, solve(10));
     }
 
+    // TC: O(N) , SC: O(3^N)
     public int solve(int num) {
         if(num == 0 || num == 1){
             return 1;

@@ -30,7 +30,7 @@ public class TowerOfHanoi {
         Assertions.assertArrayEquals(expected,actual_2);
     }
 
-    // List Solution
+    // List Solution - TC:O(2^N) , SC: O(2^N + N)
     public int[][] towerOfHanoiList(int n) {
         List<List<Integer>> list = new ArrayList<>();
         move(n, 1, 2, 3, list);
@@ -43,7 +43,7 @@ public class TowerOfHanoi {
         move(disc-1, towerTemp, towerSrc, towerDest, list);
     }
 
-    // Array Solution
+    // Array Solution - TC:O(2^N) , SC: O(2^N + N)
     int current;
     public int[][] towerOfHanoiArray(int n) {
         current = 0;

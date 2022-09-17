@@ -22,11 +22,13 @@ public class IsMagic {
     }
 
     // Here Divisibility rule of 9 is being applied
+    // TC:O(1) , SC: O(1)
     public int solveOptimised(int num) {
         return num%9 == 1 ? 1 : 0;
     }
 
     // My Solution
+    // TC:O(d) d is number of digit , SC: O(1)
     public int solve(int num) {
         return digitSum(num) != 1 ? 0 : 1;
     }
