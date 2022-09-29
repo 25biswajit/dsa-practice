@@ -16,7 +16,7 @@ public class PowerMod {
 
     // TC:O(log P) , SC: O(log P)
     public int pow(int num, int p, int mod) { // n ^ p % mod
-        if(num < 0) num = mod + num;
+        if(num < 0) num = ( num % mod + mod ) % mod;
         if(num == 0) return 0;
         if(p == 0) return 1;
         else{
