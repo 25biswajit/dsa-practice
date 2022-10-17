@@ -27,16 +27,22 @@ public class WindowString {
     public void test1(){
         String word = "ADOBECODEBANC";
         String target = "ABC";
-        Assertions.assertEquals("BANC", minWindow(word,target));
+        Assertions.assertEquals("BANC", minWindowFreqArray(word,target)); // Accepted Optimised Solution
+        Assertions.assertEquals("BANC", minWindowHashMap(word,target));  // Accepted Optimised Solution
+        Assertions.assertEquals("BANC", minWindowPepCodingTLE(word,target)); // TLE
+        Assertions.assertEquals("BANC", minWindowTLE(word,target)); // TLE
     }
     @Test
     public void test2(){
         String word = "AAAAAAA";
         String target = "AA";
-        Assertions.assertEquals("AA", minWindow(word,target));
+        Assertions.assertEquals("AA", minWindowFreqArray(word,target)); // Accepted Optimised Solution
+        Assertions.assertEquals("AA", minWindowHashMap(word,target)); // Accepted Optimised Solution
+        Assertions.assertEquals("AA", minWindowPepCodingTLE(word,target)); // TLE
+        Assertions.assertEquals("AA", minWindowTLE(word,target)); // TLE
     }
-    // Need to Understand
-    public String minWindow(String s, String t) {
+
+    public String minWindowFreqArray(String s, String t) {
         if (t.length() > s.length()) return "";
         int[] counts = new int[256];
         for (char c : t.toCharArray()) {
@@ -56,6 +62,41 @@ public class WindowString {
         }
         len = len == Integer.MAX_VALUE ? 0 : len;
         return s.substring(start, start + len);
+    }
+
+    public String minWindowHashMap(String word, String refWord){
+        int totalCount = refWord.length();
+        HashMap<Character,Integer> freqMap = new HashMap<>();
+        for(int i=0;i<refWord.length();i++){
+            Character ch = refWord.charAt(i);
+            freqMap.put(ch, freqMap.getOrDefault(ch,0)+1);
+        }
+        int length = 0;
+        int start = 0;
+        int currentCount = 0;
+        for (int left = 0, right = 0; right < word.length(); right++){
+            Character rightChar = word.charAt(right);
+            if(!freqMap.containsKey(rightChar)) continue;
+
+            freqMap.put(rightChar, freqMap.get(rightChar)-1);
+            if(freqMap.get(rightChar) >= 0){
+                currentCount++;
+            }
+
+            if (totalCount == currentCount) {
+                while (freqMap.get(word.charAt(left)) == null || freqMap.get(word.charAt(left)) < 0){
+                    if(freqMap.get(word.charAt(left))!=null){
+                        freqMap.put(word.charAt(left) , freqMap.get(word.charAt(left))+1);
+                    }
+                    left++;
+                }
+                if(length == 0 || (right - left + 1) < length) {
+                    length = right - left + 1;
+                    start = left;
+                }
+            }
+        }
+        return word.substring(start , start+length);
     }
 
     public String minWindowPepCodingTLE(String word, String refWord){
@@ -120,7 +161,7 @@ public class WindowString {
         }
     }
 
-    // TLE
+    // TLE - First Solution
     public String minWindowTLE(String word, String target){
         String ans = "";
         HashMap<String, Integer> targetFreqMap = new HashMap<>();
@@ -185,3 +226,16 @@ public class WindowString {
         return false;
     }
 }
+
+//Explanation
+//Hint:Think two pointers and hashing.How can you move left and right pointers to fit all the characters of B?
+/*
+you have a start and end pointer starting from the beginning of the string.
+You keep moving the end pointer and including more characters until you have all B characters included.
+At this point, you start moving start pointer and popping out characters until you still have all the characters of B included.
+Update your answer and keep repeating the process.
+*/
+
+
+
+
