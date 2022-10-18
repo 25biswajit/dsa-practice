@@ -3,6 +3,15 @@ package dsa.advance.day53.patternMatch;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/*
+Given a string A of size N consisting of lowercase alphabets,
+We will call a string ClosestPalindrome,
+if it is possible to make the given string a palindrome by changing exactly one of its character.
+A = "abbba" , YES
+Explanation, We can change the character at index 3(1-based) to any other character. The string will be palindromic.
+A = A = "adaddb" , NO
+*/
+
 public class ClosestPalindrome {
     @Test
     public void test(){
@@ -32,3 +41,13 @@ public class ClosestPalindrome {
         }
     }
 }
+
+/*
+Check a String Palindrome or not ?
+If Palindrome and Text length is ODD, Then Yes, We can change at least middle char to any char.
+If Palindrome and Text length is Even, Then Not possible.
+If Not  Palindrome:
+We apply our standard palindrome checking algorithm : count the number of times a set of mirror indices has different characters.
+If at the end of processing, count > 1 indicates we will have to change more than one character to make it a palindrome.
+If the count is 1, the answer is always yes.
+*/

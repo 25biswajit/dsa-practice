@@ -3,6 +3,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+
+/*
+Given two strings - a text A and a pattern B, having lower-case alphabetic characters.
+You have to determine the number of occurrences of pattern B in text A as its substring. i.e. the number of times B occurs as a substring in A.
+Input 1:
+A = "abababa"
+B = "aba"
+A has 3 substrings equal to B - A[1, 3], A[3, 5] and A[5, 7]
+*/
+
 public class HiddenPattern {
     @Test
     public void test1(){
@@ -23,6 +33,7 @@ public class HiddenPattern {
         Assertions.assertEquals(0, countPattern(text, pattern));
     }
 
+    // TC: O(N), SC: O(N)
     public int countPattern(String text, String pattern){
         String combinedText = pattern + "_" + text;
         int[] LPS = deriveLPSArray(combinedText);
