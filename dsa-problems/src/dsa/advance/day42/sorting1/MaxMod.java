@@ -1,4 +1,4 @@
-package dsa.advance.day42.Sorting1;
+package dsa.advance.day42.sorting1;
 
 
 import org.junit.jupiter.api.Assertions;

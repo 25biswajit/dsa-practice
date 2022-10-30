@@ -1,5 +1,6 @@
 package dsa.basic.day25.hashing2;
 
+import dsa.utils.ArrayUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,7 @@ public class SubArrayWithGivenSumFirstOcc {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         Integer[] expected = solveBruteForce(list,5).toArray(new Integer[0]);
         Integer[] actual = solveOptimized(list,5).toArray(new Integer[0]);
+        ArrayUtils.printArray(actual);
         Assertions.assertArrayEquals(expected,actual);
     }
     @Test
@@ -30,10 +32,8 @@ public class SubArrayWithGivenSumFirstOcc {
         long sum = 0;
         for (int i = 0; i< list.size(); i++){
             sum += list.get(i);
-            int a = list.get(i);
 
             if(sum == target){
-                start = 0;
                 end = i;
                 break;
             }

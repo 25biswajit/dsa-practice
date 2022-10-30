@@ -3,7 +3,14 @@ package dsa.advance.day45.binarySearch1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-// Not Yet Solved
+/*
+Local Maxima
+Given an array of integers A, find and return the peak element in it. An array element is peak if it is NOT smaller than its neighbors.
+For corner elements, we need to consider only one neighbor. We ensure that answer will be unique.
+NOTE: Users are expected to solve this in O(log(N)) time. The array may have duplicate elements.
+A = [1, 2, 3, 4, 5] Ans : 5
+A = [5, 17, 100, 11] Ans : 100
+*/
 public class FindPeak {
     @Test
     public void test1(){
@@ -20,24 +27,50 @@ public class FindPeak {
         int[] array = {50, 17, 10, 5};
         Assertions.assertEquals(50, findPeak(array));
     }
+    @Test
+    public void test4(){
+        int[] array = {10, 100, 100};
+        Assertions.assertEquals(100, findPeak(array));
+    }
+    @Test
+    public void test5(){
+        int[] array = {10, 100};
+        Assertions.assertEquals(100, findPeak(array));
+    }
+    @Test
+    public void test6(){
+        int[] array = {100, 100, 100};
+        Assertions.assertEquals(100, findPeak(array));
+    }
+    @Test
+    public void test7(){
+        int[] array = {100};
+        Assertions.assertEquals(100, findPeak(array));
+    }
 
-    public int findPeak(int[] array){
+    // TC: O(log N), SC: O(1)
+    public static int findPeak(int[] array){
+        int n = array.length;
+        if(n < 2){
+            return array[0];
+        }
+        if(array[0] > array[1]){ return array[0]; }
+        if(array[n-2] < array[n-1]){ return array[n-1]; }
         int low = 0, high = array.length-1;
-        while (low < high){
+        while (low <= high){
             int mid = (low + high)/2;
-
-            if(array[mid] > array[mid+1]){
-                
+            if(mid == array.length - 1 || mid == 0){
+                return array[mid];
             }
-            else if(array[mid-1] < array[mid] && array[mid] < array[mid+1]){
-                low = mid + 1;
+            else if(array[mid-1] < array[mid] && array[mid] > array[mid+1]){
+                return array[mid];
             }
-            else if(array[mid-1] > array[mid] && array[mid] > array[mid+1]){
+            else if(array[mid] > array[mid+1]){
                 high = mid - 1;
             }
-        }
-        if(high == low){
-            return array[high];
+            else{
+                low = mid + 1;
+            }
         }
         return -1;
     }
