@@ -5,6 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+/*
+Given an array A of non-negative integers of size N. Find the minimum sub-array Al, Al+1 ,..., Ar such that if we sort(in ascending order)
+that sub-array, then the whole array should get sorted. If A is already sorted, output -1.
+A = [1, 3, 2, 4, 5], Ans : [1, 2] , If we sort the sub-array A1, A2, then the whole array A gets sorted.
+*/
+
 public class MaximumUnsortedSubArray {
     @Test
     public void test1(){
