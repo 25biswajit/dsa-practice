@@ -1,4 +1,4 @@
-package dsa.advance.day57.linkedlist3;
+package dsa.advance.day58.linkedlist3;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
