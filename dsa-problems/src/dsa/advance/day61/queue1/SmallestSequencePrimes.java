@@ -31,7 +31,7 @@ public class SmallestSequencePrimes {
         Assertions.assertArrayEquals(expected, UglyNumber(2,3,5,10));
     }
 
-    // TC : O(d) log (d)
+    // TC : O(d log d)
     public ArrayList<Integer> smallestSequencePrimes(int a, int b, int c, int d){
         Integer[] inputs = {a,b,c};
         Arrays.sort(inputs);
