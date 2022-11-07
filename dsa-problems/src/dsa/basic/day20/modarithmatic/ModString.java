@@ -20,4 +20,13 @@ public class ModString {
         }
         return (int)sum;
     }
+
+    // Not working for very big numbers
+    public int findMod_GFH(String num, int mod) {
+        int res = 0;
+        for (int i = 0; i < num.length(); i++) {
+            res = (res * 10 + (int) num.charAt(i) - '0') % mod;
+        }
+        return res;
+    }
 }
