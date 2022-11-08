@@ -40,10 +40,31 @@ public class MergeOverlappingIntervals {
         Assertions.assertTrue(expected.equals(results));
     }
 
+    @Test
+    public void test1(){
+        ArrayList<Interval> intervals = new ArrayList<>();
+        intervals.add(new Interval(25,30));
+        intervals.add(new Interval(31,35));
+        intervals.add(new Interval(19,25));
+        intervals.add(new Interval(1,3));
+        intervals.add(new Interval(2,6));
+        intervals.add(new Interval(15,18));
+        intervals.add(new Interval(8,10));
+        intervals.add(new Interval(5,8));
+
+        ArrayList<Interval> results = merge(intervals);
+        System.out.println(results);
+        ArrayList<Interval> expected = new ArrayList<>();
+        expected.add(new Interval(1,10));
+        expected.add(new Interval(15,18));
+        expected.add(new Interval(19,30));
+        expected.add(new Interval(31,35));
+        Assertions.assertTrue(expected.equals(results));
+    }
+
     public static ArrayList<Interval> merge(ArrayList<Interval> intervals) {
         Collections.sort(intervals, new IntervalComparator());
-        System.out.println(intervals);
-        return mergeSortedIntervals(intervals);
+        return mergeSortedIntervalsNew(intervals);
     }
 
     public static ArrayList<Interval> mergeSortedIntervals(ArrayList<Interval> intervals) {
@@ -62,6 +83,25 @@ public class MergeOverlappingIntervals {
             }
         }
         result.add(new Interval(x,y));
+        return result;
+    }
+
+    public static ArrayList<Interval> mergeSortedIntervalsNew(ArrayList<Interval> intervals) {
+        ArrayList<Interval> result = new ArrayList<>();
+        result.add(intervals.get(0));
+        int n = intervals.size();
+        int p1 = 0, p2 = 1;
+        while (p2 < n){
+            Interval i1 = result.get(p1);
+            Interval i2 = intervals.get(p2);
+            if(i1.end >= i2.start){
+                i1.end = i2.end;
+            }else {
+                result.add(i2);
+                p1++;
+            }
+            p2++;
+        }
         return result;
     }
 }
