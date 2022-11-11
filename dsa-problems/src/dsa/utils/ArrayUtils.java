@@ -1,5 +1,6 @@
 package dsa.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class ArrayUtils {
     }
 
     public static int[] convertToIntArray(List<Integer> list){
+        return list.stream().mapToInt(Integer::intValue).toArray();
+    }
+    public static int[] convertToIntArray(ArrayList<Integer> list){
         return list.stream().mapToInt(Integer::intValue).toArray();
     }
 
