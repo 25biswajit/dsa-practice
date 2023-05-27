@@ -51,6 +51,7 @@ public class CoinChangeInfiniteWays {
         Assertions.assertEquals(0, coinChangeInfiniteWays(array,3));
     }
 
+    // TC O(N*K) SC O(N*K) - N size of Array,K Target Sum
     int dp[][] = null;
     public int coinChangeInfiniteWays(int[] array, int sum){
         dp = new int[array.length][sum+1];

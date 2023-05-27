@@ -15,7 +15,7 @@ public class MaxSumWithoutAdjElem {
         Assertions.assertEquals(8, maxSum(matrix, matrix[0].length));
     }
 
-
+    // TC O(N*M) SC O(N*M)
     public int maxSum(int[][] matrix, int i) {
         if(i <= 0) return 0;
         if (dpTable[i] == -1){

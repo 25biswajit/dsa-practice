@@ -17,6 +17,7 @@ public class MinimumNumberSquares {
         Assertions.assertEquals(2, countMinSquaresIterative(10));
     }
 
+    // TC O(N Root N), SC O(N)
     public int countMinSquares(int number) {
         if(number == 0) return 0;
         if(!dpTable.containsKey(number)){

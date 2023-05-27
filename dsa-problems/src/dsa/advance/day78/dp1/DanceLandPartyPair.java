@@ -5,6 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
+/*
+In Danceland, one person can party either alone or can pair up with another person.
+Can you find in how many ways they can party if there are A people in Danceland?
+Note: Return your answer modulo 10003, as the answer can be large.
+*/
+
 public class DanceLandPartyPair {
     @Test
     public void test(){
@@ -13,6 +19,7 @@ public class DanceLandPartyPair {
         Assertions.assertEquals(5793, numberWaysPairPeople(17));
     }
 
+    // TC O(N), SC O(N)
     public int numberWaysPairPeople(int n){
         HashMap<Integer, Long> dpTable = new HashMap<>();
         dpTable.put(1,1L);

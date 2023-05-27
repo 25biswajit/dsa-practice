@@ -42,6 +42,7 @@ public class SubSetSumMinElement {
         Assertions.assertEquals(-1, minElementsReqSubSetSum(array, 3));
     }
 
+    // TC O(N*K) SC O(N*K) - N size of Array,K Target Sum
     // approach 2 - using dp memoization
     int dp[][] = null;
     public int minElementsReqSubSetSum(int[] array, int sum){

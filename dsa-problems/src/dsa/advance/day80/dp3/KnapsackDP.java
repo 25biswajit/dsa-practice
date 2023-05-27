@@ -27,6 +27,7 @@ public class KnapsackDP {
         Assertions.assertEquals(220, solveKnapsack(values,weights,50));
     }
 
+    // TC O(N*K) SC O(N*K) - N size of Values[]
     int[][] dpTable = null;
     public int solveKnapsack(int[] values, int[] weights, int K) {
         dpTable = new int[values.length][K+1];

@@ -40,7 +40,7 @@ public class SubSetSumExists {
         Assertions.assertTrue(doExistSubsetSum_(array, 2));
     }
 
-    // approach 1 - without dp table
+    // approach 1 - without dp table - TC : O(2^N), SC O(1)
     public boolean IsExistSubsetSum(int[] array, int sum){
         return IsExistSubsetSum(array.length-1, sum, array);
     }
@@ -55,6 +55,7 @@ public class SubSetSumExists {
         return value;
     }
 
+    // TC O(N*K) SC O(N*K) - N size of Array,K Target Sum
     // approach 2 - using dp memoization
     int dp[][] = null;
     public boolean doExistSubsetSum(int[] array, int sum){
@@ -75,6 +76,7 @@ public class SubSetSumExists {
         return dp[i][k];
     }
 
+    // TC O(N*K) SC O(N*K) - N size of Array,K Target Sum
     // If Negative elements present in Array we can't use DP table, Use HashMap there
     // approach 3 - using dp memoization Hashmap
     HashMap<String, Integer> dpMap = new HashMap<>();

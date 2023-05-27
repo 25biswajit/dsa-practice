@@ -42,6 +42,7 @@ public class UniquePathsRatInMaze {
         Assertions.assertEquals(1, uniquePathsWithObstacles(matrix));
     }
 
+    // TC O(N*M) SC O(N*M)
     public int uniquePathsWithObstacles(int[][] matrix) {
         map = new HashMap<>();
         uniquePathsRatInMaze(0,0,matrix);

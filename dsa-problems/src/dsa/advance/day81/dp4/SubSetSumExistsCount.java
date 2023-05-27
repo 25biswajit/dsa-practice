@@ -38,6 +38,7 @@ public class SubSetSumExistsCount {
         return countSubSetSumExist(array.length-1, sum, array);
     }
 
+    // TC O(N*K) SC O(N*K) - N size of Array,K Target Sum
     private int countSubSetSumExist(int i, int k, int[] array){
         if(k == 0) return 1;
         if(i<0) return 0;

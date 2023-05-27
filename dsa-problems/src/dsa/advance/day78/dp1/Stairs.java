@@ -9,6 +9,7 @@ public class Stairs {
         Assertions.assertEquals(5, climbStairs(4));
         Assertions.assertEquals(8, climbStairs(5));
     }
+    // TC O(N), SC O(1)
     public int climbStairs(int number) {
         if(number <= 1) return number;
         long a = 0L;

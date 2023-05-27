@@ -26,7 +26,7 @@ public class DungeonPrincess {
         Assertions.assertEquals(5, dungeonPrincess(matrix));
     }
 
-
+    // TC O(N*M) SC O(N*M)
     public int dungeonPrincess(int[][] matrix) {
         dungeonPrincess(0,0,matrix);
         return map.get("0-0");

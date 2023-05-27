@@ -56,7 +56,8 @@ public class CoinChangeInfinite {
         }
         return dp[amount]<=amount ? dp[amount] : -1;
     }
-    
+
+    // TC O(N*K) SC O(N*K) - N size of Array,K Target Sum
     // DP State - in 2D array
     int dp[][] = null;
     public int minCoinReqInfinite(int[] array, int sum){

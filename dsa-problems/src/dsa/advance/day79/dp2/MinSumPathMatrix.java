@@ -63,7 +63,7 @@ public class MinSumPathMatrix {
     }
 
     //https://leetcode.com/problems/minimum-path-sum/solutions/3345991/try-ones-more-using-my-hints-easy-java-solution-2-approaches-recursive-and-iterative/
-    public int minPathSumLeetCode(int[][] grid) {
+    public int minPathSumLeetCode(int[][] grid) { // TC O(N*M) SC O(1)
         int n = grid.length;
         int m = grid[0].length;
         int dp[][] = new int[grid.length][grid[0].length];
@@ -81,7 +81,7 @@ public class MinSumPathMatrix {
     }
 
     int dp[][] = null;
-    public int minPathSumNew(int[][] matrix) {
+    public int minPathSumNew(int[][] matrix) { // TC O(N*M) SC O(N*M)
         int rowLimit = matrix.length;
         int colLimit = matrix[0].length;
         dp = new int[rowLimit][colLimit];
