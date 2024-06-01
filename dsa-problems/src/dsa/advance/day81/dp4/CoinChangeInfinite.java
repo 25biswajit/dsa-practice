@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /*
 https://leetcode.com/problems/coin-change/description/
@@ -30,18 +31,34 @@ public class CoinChangeInfinite {
         int[] array = {15,2,1};
         Assertions.assertEquals(6, minCoinReqInfinite(array,11));
         Assertions.assertEquals(6, minCoinReqInfiniteSimple(array,11));
+
+        int resultNew = coinChange(11, array);
+        Assertions.assertEquals(6, resultNew);
     }
     @Test
     public void test3(){
         int[] array = {2};
         Assertions.assertEquals(3, minCoinReqInfinite(array,6));
         Assertions.assertEquals(3, minCoinReqInfiniteSimple(array,6));
+
+        int resultNew = coinChange(6, array);
+        Assertions.assertEquals(3, resultNew);
     }
     @Test
     public void test4(){
         int[] array = {2};
         Assertions.assertEquals(-1, minCoinReqInfinite(array,3));
         Assertions.assertEquals(-1, minCoinReqInfiniteSimple(array,3));
+    }
+
+    @Test
+    public void test5(){
+        int[] array = {1,2,5};
+        Assertions.assertEquals(3, minCoinReqInfinite(array,11));
+        Assertions.assertEquals(3, minCoinReqInfiniteSimple(array,11));
+
+        int resultNew = coinChange(11, array);
+        Assertions.assertEquals(3, resultNew);
     }
 
     // DP - Simple Iterative
@@ -102,6 +119,29 @@ public class CoinChangeInfinite {
             dpStates.put(key,value);
         }
         return dpStates.get(key);
+    }
+
+
+
+    private Map<String, Integer> memo;
+
+    public int coinChange(int amount,int[] coins) {
+        int result = coinChange(coins.length - 1, coins, amount, new HashMap<>());
+        return result >= Integer.MAX_VALUE - 1 ? -1 : result;
+    }
+
+    private int coinChange(int index, int[] coins, int amount, Map<String,Integer> map) {
+        if(amount == 0) return 0;
+        if(index < 0) return Integer.MAX_VALUE - 1;
+        String key = index + "-" + amount;
+        if(map.containsKey(key)) return map.get(key);
+        int result = coinChange(index-1, coins, amount, map);
+        if(amount >= coins[index]){
+            int include = coinChange(index, coins, amount - coins[index], map) + 1;
+            result = Math.min(result, include);
+        }
+        map.put(key, result);
+        return result;
     }
 
 }

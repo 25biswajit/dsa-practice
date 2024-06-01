@@ -36,6 +36,11 @@ public class SubArraySumEqualsK {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(3,9,-2,4,1,-7,2,6,-5,8,-3,-7,6,2));
         Assertions.assertEquals(solveBruteForce(list,5), solveOptimized(list,5));
     }
+    @Test
+    public void test5(){
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0,4,2,1,0));
+        Assertions.assertEquals(solveBruteForce(list,7), solveOptimized(list,7));
+    }
 
     // Pepcoding Solution
     public int solveOptimized(ArrayList<Integer> list, int target){
@@ -43,13 +48,13 @@ public class SubArraySumEqualsK {
         int sum = 0;
         HashMap<Integer,Integer> map = new HashMap<>();
         map.put(sum, 1);
-        for (int i = 0; i< list.size(); i++){
-            sum += list.get(i);
+        for (Integer integer : list) {
+            sum += integer;
             int part = sum - target;
-            c = c + map.getOrDefault(part,0);
-            int freq = map.getOrDefault(sum,0);
-            map.put(sum, freq + 1);
+            c = c + map.getOrDefault(part, 0);
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
+        System.out.println(c);
         return c;
     }
 

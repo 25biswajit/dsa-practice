@@ -28,7 +28,7 @@ public class MergeSortedLinkedList {
     public ListNode mergeTwoLists(ListNode head1, ListNode head2) {
         if(head1 == null) { return head2; }
         if(head2 == null) { return head1; }
-        ListNode head = null, tail = null;
+        ListNode head, tail;
         if(head1.val < head2.val){
             head = tail = head1;
             head1 = head1.next;
@@ -57,28 +57,22 @@ public class MergeSortedLinkedList {
     }
 
     public ListNode mergeTwoLists_another(ListNode A, ListNode B) {
-        if (A == null)
-            return B;
-        if (B == null)
-            return A;
+        if (A == null) return B;
+        if (B == null) return A;
         ListNode head;
         ListNode node = new ListNode(0,null);
         head = node;
         while (A != null && B != null) {
-            if (A.val <= B.val) {
+            if (A.val < B.val) {
                 node.next = A;
                 A = A.next;
-                node = node.next;
             } else {
                 node.next = B;
                 B = B.next;
-                node = node.next;
             }
+            node = node.next;
         }
-        if (A == null)
-            node.next = B;
-        else
-            node.next = A;
+        node.next = A == null ? B : A;
         head = head.next;
         return head;
     }

@@ -1,8 +1,10 @@
 package dsa.advance.day60.stack2;
 
+import dsa.utils.ArrayUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /*
@@ -27,6 +29,7 @@ public class HistogramRectangleMaxArea {
     @Test
     public void test3(){
         int[] array = {2,3};
+        ArrayUtils.printArray( nextSmallerIndex(array) );
         Assertions.assertEquals(4, largestRectangleArea(array));
     }
     @Test
@@ -71,7 +74,7 @@ public class HistogramRectangleMaxArea {
         return ansArray;
     }
 
-    public int[] nextSmallerIndex(int[] array) {
+    public int[] nextSmallerIndexOld(int[] array) {
         int n = array.length;
         int[] ansArray = new int[array.length];
         Stack<Integer> stack = new Stack<>();
@@ -93,6 +96,30 @@ public class HistogramRectangleMaxArea {
             stack.push(i);
         }
         return ansArray;
+    }
+
+    public int[] nextSmallerIndex(int[] array) {
+        int n = array.length;
+        int[] nse = new int[n];
+        Arrays.fill(nse, n);
+        Stack<Integer> stack = new Stack<>();
+        int i = n-1;
+        while(i >= 0){
+            if(!stack.isEmpty()) {
+                int top = array[stack.peek()];
+                if (top < array[i]) {
+                    nse[i] = stack.peek();
+                } else {
+                    while (!stack.isEmpty() && array[i] <= array[stack.peek()]) {
+                        stack.pop();
+                    }
+                    continue;
+                }
+            }
+            stack.push(i);
+            i--;
+        }
+        return nse;
     }
 }
 

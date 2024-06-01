@@ -14,6 +14,9 @@ public class ClosestMinMax {
         Assertions.assertEquals(3, solveBruteForce(integers));
         Assertions.assertEquals(solveBruteForce(integers), solveLeftToRightIteration(integers));
         Assertions.assertEquals(solveBruteForce(integers), solveRightToLeftIteration(integers));
+
+        int[] arr = {1,2,3,1,3,4,6,4,6,3,1};
+        Assertions.assertEquals(solveBruteForce(integers), solve2024(arr));
     }
 
     public int solveRightToLeftIteration(ArrayList<Integer> A) {
@@ -121,6 +124,44 @@ public class ClosestMinMax {
             }
         }
         return answer;
+    }
+
+    // latest Solution 18/01/2024
+    public int solve2024(int[] A) {
+        int n = A.length;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        for (int j : A) {
+            min = Math.min(min, j);
+            max = Math.max(max, j);
+        }
+
+        if(min == max){
+            return 1;
+        }
+
+        int minIndex = -1;
+        int maxIndex = -1;
+        int minLength = n+1;
+        for(int i=0; i <n;i++){
+            if(A[i] == min){
+                minIndex = i;
+                minLength = (maxIndex != -1) ? getMinLen(maxIndex, minIndex, minLength) : minLength;
+
+            }
+            else if(A[i] == max){
+                maxIndex = i;
+                minLength = (minIndex != -1) ? getMinLen(maxIndex, minIndex, minLength) : minLength;
+            }
+        }
+
+        return minLength;
+    }
+
+    private int getMinLen(int maxIndex, int minIndex, int minLength){
+        int res = Math.abs(maxIndex - minIndex) + 1;
+        return Math.min ( minLength, res);
     }
 
 }

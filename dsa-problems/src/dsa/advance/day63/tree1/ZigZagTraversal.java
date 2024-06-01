@@ -4,10 +4,7 @@ import dsa.utils.MatrixUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class ZigZagTraversal {
 
@@ -27,7 +24,7 @@ public class ZigZagTraversal {
         Assertions.assertArrayEquals(expected,actual);
     }
 
-    public ArrayList<ArrayList<Integer>> traverseZigZag(TreeNode root) {
+    public ArrayList<ArrayList<Integer>> traverseZigZag_(TreeNode root) {
         ArrayList<ArrayList<Integer>> list = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
@@ -46,5 +43,28 @@ public class ZigZagTraversal {
             isLeftToRight = !isLeftToRight;
         }
         return list;
+    }
+
+    public ArrayList<ArrayList<Integer>> traverseZigZag(TreeNode root) {
+        boolean leftToRight = true;
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            ArrayList<Integer> list = new ArrayList<>();
+            int n = q.size();
+            for(int i = 0; i < n; i++){
+                TreeNode node = q.poll();
+                list.add(node.val);
+                if(node.left != null) q.add(node.left);
+                if(node.right != null) q.add(node.right);
+            }
+            if(!leftToRight){
+                Collections.reverse(list);
+            }
+            ans.add(list);
+            leftToRight = !leftToRight;
+        }
+        return ans;
     }
 }

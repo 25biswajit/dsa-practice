@@ -1,5 +1,6 @@
 package dsa.basic.day30.treebasic;
 
+import dsa.model.TreeNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,12 +18,12 @@ public class TreeTraversalWithoutRecursion {
         TreeNode node6 = new TreeNode(6);
         TreeNode node7 = new TreeNode(7);
 
-        node1.left = node2;
-        node2.left = node4;
-        node2.right = node5;
-        node1.right = node3;
-        node3.left = node6;
-        node3.right = node7;
+        node1.setLeft(node2);
+        node2.setLeft(node4);
+        node2.setRight(node5);
+        node1.setRight(node3);
+        node3.setLeft(node6);
+        node3.setRight(node7);
 
         Integer[] expectedPre = {1,2,4,5,3,6,7};
         Integer[] actualPre = preorderTraversal(node1).toArray(new Integer[0]);
@@ -31,10 +32,6 @@ public class TreeTraversalWithoutRecursion {
         Integer[] expectedIn = {4,2,5,1,6,3,7};
         Integer[] actualIn = inorderTraversal(node1).toArray(new Integer[0]);
         Assertions.assertArrayEquals(expectedIn,actualIn);
-
-//        Integer[] expectedPost = {4,5,2,6,7,3,1};
-//        Integer[] actualPost = postorderTraversal(node1).toArray(new Integer[0]);
-//        Assertions.assertArrayEquals(expectedPost,actualPost);
     }
 
 
@@ -45,12 +42,12 @@ public class TreeTraversalWithoutRecursion {
         stack.push(root);
         while (!stack.isEmpty()){
             TreeNode current = stack.pop();
-            list.add(current.val);
-            if(current.right != null){
-                stack.push(current.right);
+            list.add(current.getVal());
+            if(current.getRight() != null){
+                stack.push(current.getRight());
             }
-            if(current.left != null){
-                stack.push(current.left);
+            if(current.getLeft() != null){
+                stack.push(current.getLeft());
             }
         }
         return list;
@@ -64,30 +61,12 @@ public class TreeTraversalWithoutRecursion {
 
             while (current!=null){
                 stack.push(current);
-                current = current.left;
+                current = current.getLeft();
             }
 
             current = stack.pop();
-            list.add(current.val);
-            current = current.right;
-        }
-        return list;
-    }
-
-    private ArrayList<Integer> postorderTraversal(TreeNode root) {
-        ArrayList<Integer> list = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode current = root;
-        while (current!=null || !stack.isEmpty()){
-
-            while (current!=null){
-                stack.push(current);
-                current = current.left;
-            }
-
-            current = stack.pop();
-            list.add(current.val);
-            current = current.right;
+            list.add(current.getVal());
+            current = current.getRight();
         }
         return list;
     }

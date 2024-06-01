@@ -1,5 +1,6 @@
 package dsa.basic.day25.hashing2;
 
+import dsa.utils.ArrayUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +42,29 @@ public class LongestSubArrayZeroSum {
         Assertions.assertEquals(solveBruteForce(list), solveOptimized(list));
     }
 
+    @Test
+    public void test7(){
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(2,8,-3,-5,2,-4,6,1,2,1,-3,4));
+        Assertions.assertEquals(solveBruteForce(list), solveOptimized(list));
+        Assertions.assertEquals(solveBruteForce(list), solveOptimized_new(ArrayUtils.convertToIntArray(list)));
+    }
+
+    public int solveOptimized_new(int[] a) {
+        int sum = 0, max = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0,-1);
+        for(int i = 0; i < a.length; i++){
+            sum += a[i];
+            if(map.containsKey(sum)){
+                max = Integer.max(max, i - map.get(sum));
+            }else{
+                map.put(sum, i);
+            }
+
+        }
+        return max;
+    }
+
     public int solveOptimized(ArrayList<Integer> list) {
         long sum = 0;
         int max = 0;
@@ -59,6 +83,7 @@ public class LongestSubArrayZeroSum {
                 map.put(sum, currentIndex);
             }
         }
+        System.out.println(max);
         return max;
     }
 

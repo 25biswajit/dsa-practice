@@ -1,10 +1,14 @@
 package dsa.advance.day55.linkedlist1;
 
-import java.util.Arrays;
+import java.util.Comparator;
 
-public class ListNode {
+public class ListNode implements Comparable<ListNode>{
     public int val;
     public ListNode next;
+
+    public ListNode(int val){
+        this(val,null);
+    }
 
     public ListNode(int val, ListNode next) {
         this.val = val;
@@ -37,5 +41,10 @@ public class ListNode {
             node = node.next;
         }
         return s.substring(1);
+    }
+
+    @Override
+    public int compareTo(ListNode o) {
+        return this.val-o.val;
     }
 }

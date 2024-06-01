@@ -12,8 +12,8 @@ class Interval {
     }
 
     Interval(int s, int e) {
-        start = s;
-        end = e;
+        start = Math.min(e, s);
+        end = Math.max(s, e);
     }
 
     @Override

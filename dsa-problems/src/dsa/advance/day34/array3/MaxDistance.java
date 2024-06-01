@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 /*
 Given an array, A of integers of size N. Find the maximum value of j - i such that A[i] <= A[j].
 A = [3, 5, 4, 2],For A[0] = 3 and A[2] = 4, the ans is (2 - 0) = 2.
@@ -78,5 +79,18 @@ class Node{
                 return 1;
             }
         };
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Node)) return false;
+        Node node = (Node) o;
+        return value == node.value && index == node.index;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, index);
     }
 }

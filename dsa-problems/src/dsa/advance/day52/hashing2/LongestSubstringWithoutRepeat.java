@@ -13,8 +13,19 @@ Ans : Substring "abc" is the longest substring without repeating characters in s
 */
 public class LongestSubstringWithoutRepeat {
     @Test
-    public void test(){
+    public void test1(){
         String word = "abcdcba";
+        Assertions.assertEquals(4, lengthOfLongestSubstring(word));
+    }
+    @Test
+    public void test2(){
+        String word = "pwwkew";
+        Assertions.assertEquals(3, lengthOfLongestSubstring(word));
+    }
+
+    @Test
+    public void test3(){
+        String word = "abcad";
         Assertions.assertEquals(4, lengthOfLongestSubstring(word));
     }
 

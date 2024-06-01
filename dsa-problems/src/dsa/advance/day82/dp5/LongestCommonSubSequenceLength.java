@@ -1,5 +1,7 @@
 package dsa.advance.day82.dp5;
 
+import dsa.utils.MathUtils;
+import dsa.utils.MatrixUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,10 +35,12 @@ public class LongestCommonSubSequenceLength {
 
     @Test
     public void test1(){
-        String s1 = "abbcdgf";
-        String s2 = "bachegf";
+        /*String s1 = "abbcdgf";
+        String s2 = "bachegf";*/
+        String s1 = "acgf";
+        String s2 = "adgf";
         int result = lengthLongestCommonSubSequence(s1,s2);
-        Assertions.assertEquals(4,result);
+        Assertions.assertEquals(3,result);
     }
 
     // TC O(N * M), SC O(N * M)
@@ -44,7 +48,9 @@ public class LongestCommonSubSequenceLength {
     public int lengthLongestCommonSubSequence(String s1, String s2){
         dp = new int[s1.length()][s2.length()];
         Arrays.stream(dp).forEach(a -> Arrays.fill(a, -1));
-        return lengthLongestCommonSubSequence(s1,s2,s1.length()-1, s2.length()-1);
+        int ans  = lengthLongestCommonSubSequence(s1,s2,s1.length()-1, s2.length()-1);
+        MatrixUtils.printMatrix(dp);
+        return ans;
     }
 
     public int lengthLongestCommonSubSequence(String s1, String s2, int i, int j){

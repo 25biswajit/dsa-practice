@@ -20,26 +20,31 @@ public class UniquePathsRatInMaze {
     public void test1(){
         int[][] matrix = {{0,0,0},{0,0,0},{0,0,0}};
         Assertions.assertEquals(6, uniquePathsWithObstacles(matrix));
+        Assertions.assertEquals(6, uniquePathsWithObstaclesBackward(matrix));
     }
     @Test
     public void test2(){
         int[][] matrix = {{0,0,0},{0,1,0},{0,0,0}};
         Assertions.assertEquals(2, uniquePathsWithObstacles(matrix));
+        Assertions.assertEquals(2, uniquePathsWithObstaclesBackward(matrix));
     }
     @Test
     public void test3(){
         int[][] matrix = {{0,1}};
         Assertions.assertEquals(0, uniquePathsWithObstacles(matrix));
+        Assertions.assertEquals(0, uniquePathsWithObstaclesBackward(matrix));
     }
     @Test
     public void test4(){
         int[][] matrix = {{1,0}};
         Assertions.assertEquals(0, uniquePathsWithObstacles(matrix));
+        Assertions.assertEquals(0, uniquePathsWithObstaclesBackward(matrix));
     }
     @Test
     public void test5(){
         int[][] matrix = {{0}};
         Assertions.assertEquals(1, uniquePathsWithObstacles(matrix));
+        Assertions.assertEquals(1, uniquePathsWithObstaclesBackward(matrix));
     }
 
     // TC O(N*M) SC O(N*M)
@@ -64,6 +69,23 @@ public class UniquePathsRatInMaze {
             map.put(key, value);
         }
         return map.get(key);
+    }
+
+    public int uniquePathsWithObstaclesBackward(int[][] matrix) {
+        map = new HashMap<>();
+        int rowLimit = matrix.length;
+        int colLimit = matrix[0].length;
+        return uniquePathsRatInMazeBackward(rowLimit-1, colLimit-1, matrix);
+    }
+
+    private int uniquePathsRatInMazeBackward(int r, int c,int[][] matrix) {
+        String key = r +"-"+ c;
+        if(r < 0 || c < 0 || matrix[r][c] == 1) return 0;
+        if(r == c && r == 0) return 1;
+        if(map.containsKey(key)) return map.get(key);
+        int result = uniquePathsRatInMazeBackward(r,c-1,matrix) + uniquePathsRatInMazeBackward(r-1,c,matrix);
+        map.put(key, result);
+        return result;
     }
 }
 

@@ -3,8 +3,7 @@ package dsa.advance.day34.array3;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
+import java.util.*;
 import static dsa.advance.day34.array3.MergeOverlappingIntervals.mergeSortedIntervals;
 
 
@@ -81,6 +80,20 @@ public class MergeIntervals {
     @Test
     public void test5(){
         ArrayList<Interval> intervals = new ArrayList<>();
+        intervals.add(new Interval(1,3));
+        intervals.add(new Interval(8,10));
+        Interval newIntervals = new Interval(5,7);
+        ArrayList<Interval> results = insert(intervals,newIntervals);
+        System.out.println(results);
+        ArrayList<Interval> expected = new ArrayList<>();
+        expected.add(new Interval(1,3));
+        expected.add(new Interval(5,7));
+        expected.add(new Interval(8,10));
+        Assertions.assertTrue(expected.equals(results));
+    }
+    @Test
+    public void test6(){
+        ArrayList<Interval> intervals = new ArrayList<>();
         Interval newIntervals = new Interval(10,8);
         ArrayList<Interval> results = insert(intervals,newIntervals);
         System.out.println(results);
@@ -88,10 +101,60 @@ public class MergeIntervals {
         expected.add(new Interval(8,10));
         Assertions.assertTrue(expected.equals(results));
     }
+    @Test
+    public void test7(){
+        ArrayList<Interval> intervals = new ArrayList<>();
+        intervals.add(new Interval(8,10));
+        Interval newIntervals = new Interval(5,7);
+        ArrayList<Interval> results = insert(intervals,newIntervals);
+        System.out.println(results);
+        ArrayList<Interval> expected = new ArrayList<>();
+        expected.add(new Interval(5,7));
+        expected.add(new Interval(8,10));
+        Assertions.assertEquals(expected, results);
+    }
 
-    public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
+    public ArrayList<Interval> insert0(ArrayList<Interval> intervals, Interval newInterval) {
         ArrayList<Interval> intervalsSortedBasedOnStartTime = prepareOneList(intervals,newInterval);
         return mergeSortedIntervals(intervalsSortedBasedOnStartTime);
+    }
+
+    public ArrayList<Interval> insert1(ArrayList<Interval> intervals, Interval newInterval) {
+        newInterval = new Interval(newInterval.start, newInterval.end);
+        intervals.add(newInterval);
+        intervals.sort(new IntervalComparator());
+        return mergeSortedIntervals(intervals);
+    }
+
+    // Best Solution
+    public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
+        //intervals.sort(new IntervalComparator());
+        ArrayList<Interval> list = new ArrayList<>();
+        newInterval = new Interval(newInterval.start, newInterval.end);
+
+        if(intervals.isEmpty()){
+            list.add(newInterval);
+            return list;
+        }
+
+        for(int i = 0; i < intervals.size(); i++){
+            Interval current = intervals.get(i);
+
+            if(current.end < newInterval.start){
+                list.add(current);
+            }
+            else if(current.start > newInterval.end){
+                list.add(newInterval);
+                newInterval = current;
+            }
+            else{
+                newInterval.start = Math.min(newInterval.start, current.start);
+                newInterval.end = Math.max(newInterval.end, current.end);
+            }
+        }
+        list.add(newInterval);
+
+        return list;
     }
 
     private ArrayList<Interval> prepareOneList(ArrayList<Interval> intervals, Interval newInterval) {

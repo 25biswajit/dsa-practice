@@ -48,6 +48,12 @@ public class FindPeak {
         Assertions.assertEquals(100, findPeak(array));
     }
 
+    @Test
+    public void test8(){
+        int[] array = {3,4,3,2,1};
+        Assertions.assertEquals(4, findPeak(array));
+    }
+
     // TC: O(log N), SC: O(1)
     public static int findPeak(int[] array){
         int n = array.length;

@@ -11,8 +11,13 @@ public class FindRotatedArray {
             Assertions.assertEquals(i, searchRotatedArray(array,array[i]));
         }
     }
+    @Test
+    public void test2(){
+        int[] array = {4,5,6,7,0,1,2};
+        Assertions.assertEquals(4, searchRotatedArray(array,0));
+    }
 
-    public int searchRotatedArray(int[] array, int key) {
+    public int searchRotatedArray_old(int[] array, int key) {
         int low = 0, high = array.length - 1;
         while (low <= high){
             int mid = (low + high)/2;
@@ -38,6 +43,36 @@ public class FindRotatedArray {
             }
             else{
                 return -1;
+            }
+        }
+        return -1;
+    }
+
+    public int searchRotatedArray(int[] a, int k) {
+        int n = a.length;
+        if(n == 1 && a[0] != k) return -1;
+        if(n == 1) return 0;
+
+        int l = 0, h = n-1, mid = 0;
+
+        while(l <= h){
+            mid = (l + h)/2;
+            if(a[mid] == k) return mid;
+            // front sorted
+            if(a[l] <= a[mid]){
+                if(a[mid] > k && k >= a[l]){
+                    h = mid - 1;
+                }else{
+                    l = mid + 1;
+                }
+            }
+            // back sorted
+            else if(a[mid] <= a[h]){
+                if(a[mid] < k && k <= a[h]){
+                    l = mid + 1;
+                }else{
+                    h = mid - 1;
+                }
             }
         }
         return -1;
